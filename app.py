@@ -22,16 +22,20 @@ def home():
     return "67 streak server running."
 
 @app.route("/log")
+@app.route("/log")
 def log():
     user = request.args.get("user", "").strip()
+    force = request.args.get("force", "0")
+
     if not user:
         return "Missing ?user=NAME", 400
 
-    # ✅ Only allow logging at 6:07 PM IST
     from zoneinfo import ZoneInfo
     IST = ZoneInfo("Asia/Kolkata")
     now_ist = datetime.now(IST)
-    if now_ist.strftime("%H:%M") != "18:07":
+
+    # ⛔ Only count at 6:07 PM IST unless force=1
+    if now_ist.strftime("%H:%M") != "18:07" and force != "1":
         return "Not counted (only at 6:07 PM IST).", 200
 
     today = now_ist.date().isoformat()
@@ -56,7 +60,6 @@ def log():
     save_data(data)
 
     return f"✅ Counted! {user} streak = {streaks[user]}"
-
 @app.route("/leaderboard")
 def leaderboard():
     ranked = sorted(data["streaks"].items(), key=lambda x: x[1], reverse=True)
