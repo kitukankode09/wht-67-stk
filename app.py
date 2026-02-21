@@ -23,13 +23,19 @@ def home():
 
 @app.route("/log")
 def log():
-    user = request.args.get("user")
-
+    user = request.args.get("user", "").strip()
     if not user:
         return "Missing ?user=NAME", 400
 
-    today = datetime.now().date().isoformat()
-    yesterday = (datetime.now().date() - timedelta(days=1)).isoformat()
+    # ✅ Only allow logging at 6:07 PM IST
+    from zoneinfo import ZoneInfo
+    IST = ZoneInfo("Asia/Kolkata")
+    now_ist = datetime.now(IST)
+    if now_ist.strftime("%H:%M") != "18:07":
+        return "Not counted (only at 6:07 PM IST).", 200
+
+    today = now_ist.date().isoformat()
+    yesterday = (now_ist.date() - timedelta(days=1)).isoformat()
 
     streaks = data["streaks"]
     last_logged = data["last_logged"]
@@ -49,7 +55,7 @@ def log():
     last_logged[user] = today
     save_data(data)
 
-    return f"{user} streak = {streaks[user]}"
+    return f"✅ Counted! {user} streak = {streaks[user]}"
 
 @app.route("/leaderboard")
 def leaderboard():
