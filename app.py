@@ -78,7 +78,7 @@ def ui():
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>6767C1Streak</title>
+  <title>67 Streak</title>
   <style>
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; background: #0b0f19; color: #e8eaf0; }
     .wrap { max-width: 720px; margin: 0 auto; padding: 24px; }
@@ -103,7 +103,7 @@ def ui():
   <div class="wrap">
     <div class="card">
       <h1>67 Streak</h1>
-      <p class="pill">divyanshi's worst nightmare fr hahah</p>
+      <p class="pill">Click to log your 67, then see the leaderboard</p>
 
       <div class="row">
         <input id="name" placeholder="Your name (exact spelling)" />
