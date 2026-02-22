@@ -103,7 +103,7 @@ def ui():
   <div class="wrap">
     <div class="card">
       <h1>67 Streak</h1>
-      <p class="pill">divyanshi's worst nightmare fr hahah :</p>
+      <p class="pill">divyanshi's worst nightmare fr hahah</p>
 
       <div class="row">
         <input id="name" placeholder="Your name (exact spelling)" />
